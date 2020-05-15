@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Painter</string>
+    <string name="str_user_id">User id</string>
+    <string name="str_password">Password</string>
+    <string name="str_login">Login</string>
+    <string name="str_welcome">Welcome to Painter</string>
+    <string name="val_str_user_id">Please Enter User Id</string>
+    <string name="str_val_pass">Please Enter Password</string>
+    <string name="str_val_pass_length">Please Enter Min. 4 characters</string>
+    <string name="home">Home</string>
+    <string name="str_painter_details">Painter Details</string>
+</resources>

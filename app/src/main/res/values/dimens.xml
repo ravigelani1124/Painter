@@ -1,0 +1,37 @@
+<resources>
+
+    <dimen name="textSizeExtraLarge">@dimen/_20sdp</dimen>
+    <dimen name="textSizePerfectLarge">@dimen/_18sdp</dimen>
+    <dimen name="textSizeLarge">@dimen/_16sdp</dimen>
+    <dimen name="textSizeMedium">@dimen/_14sdp</dimen>
+    <dimen name="textSizeSmall">@dimen/_12sdp</dimen>
+    <dimen name="textSizeMantra">@dimen/_11sdp</dimen>
+    <dimen name="textSizeTiny">@dimen/_10sdp</dimen>
+    <dimen name="textSizeWeek">@dimen/_8sdp</dimen>
+
+    <dimen name="bottomMarginForButton">@dimen/_20sdp</dimen>
+    <dimen name="defaultMargin">@dimen/_16sdp</dimen>
+
+
+    <dimen name="dateTitleTextSize">18sp</dimen>
+    <!--<dimen name="dateTitlePaddingBottom">5dp</dimen>-->
+    <!-- weekLayout -->
+    <dimen name="dayOfWeekTextSize">16sp</dimen>
+    <!-- weekRowLayout -->
+    <!--<dimen name="week_bottom_padding">5dp</dimen>-->
+    <!-- Day of the month -->
+    <dimen name="underline_weight">6dp</dimen>
+    <dimen name="underline_height">2dp</dimen>
+    <dimen name="day_of_month_background_size">32dp</dimen>
+    <dimen name="dayOfMonthIndicatorSize">3dp</dimen>
+    <dimen name="dayOfMonthImageMarginTop">20dp</dimen>
+    <dimen name="padding">8dp</dimen>
+
+
+    <!--New dimens-->
+    <dimen name="calendarTitlePaddingTop">8dp</dimen>
+    <dimen name="calendarTitlePaddingBottom">8dp</dimen>
+    <dimen name="weekTitlePaddingTop">8dp</dimen>
+    <dimen name="weekTitlePaddingBottom">8dp</dimen>
+    <dimen name="minDayCellHeight">40dp</dimen>
+</resources>
