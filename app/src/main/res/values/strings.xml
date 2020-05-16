@@ -9,4 +9,7 @@
     <string name="str_val_pass_length">Please Enter Min. 4 characters</string>
     <string name="home">Home</string>
     <string name="str_painter_details">Painter Details</string>
+    <string name="str_val_userid_not_match">User id does not match our record</string>
+    <string name="str_pass_incorrect">You have eneter wrong password</string>
+    <string name="str_login_message">Login Successfully</string>
 </resources>

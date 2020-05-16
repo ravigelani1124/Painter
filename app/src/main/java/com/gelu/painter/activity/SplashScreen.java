@@ -7,6 +7,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.gelu.painter.R;
+import com.gelu.painter.utility.TinyDB;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,7 +34,12 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     private void startApp() {
-        startActivity(new Intent(splashScreen, LoginScreen.class));
-        finish();
+        if (new TinyDB(splashScreen).getBoolean(TinyDB.isLogin)) {
+            startActivity(new Intent(splashScreen, HomeScreen.class));
+            finish();
+        } else {
+            startActivity(new Intent(splashScreen, LoginScreen.class));
+            finish();
+        }
     }
 }
