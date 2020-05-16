@@ -9,6 +9,7 @@ import com.gelu.painter.R;
 import com.gelu.painter.model.PainterImages;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -17,9 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder> {
 
     private Context context;
-    private ArrayList<PainterImages> painterImagesArrayList;
+    private List<PainterImages> painterImagesArrayList;
 
-    public ImageAdapter(Context context, ArrayList<PainterImages> painterImagesArrayList) {
+    public ImageAdapter(Context context, List<PainterImages> painterImagesArrayList) {
         this.context = context;
         this.painterImagesArrayList = painterImagesArrayList;
     }

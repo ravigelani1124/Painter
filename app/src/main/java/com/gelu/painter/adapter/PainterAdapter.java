@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gelu.painter.R;
-import com.gelu.painter.model.Painter;
+import com.gelu.painter.database.Painter;
 
 import java.util.ArrayList;
 
@@ -38,7 +38,7 @@ public class PainterAdapter extends RecyclerView.Adapter<PainterAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull PainterAdapter.MyViewHolder holder, final int position) {
         final Painter painter = painterArrayList.get(position);
-        holder.tvPainterName.setText(painter.getmPainterName());
+        holder.tvPainterName.setText(painter.getPainterName());
 
         ImageAdapter imageAdapter = new ImageAdapter(context, painter.getPainterImagesArrayList());
         holder.rvPainterImages.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
