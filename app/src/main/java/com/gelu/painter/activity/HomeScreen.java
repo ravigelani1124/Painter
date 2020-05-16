@@ -110,7 +110,6 @@ public class HomeScreen extends AppCompatActivity implements PainterAdapter.OnIn
         }
     }
 
-
     private class AddPainter extends AsyncTask<Painter, String, Painter> {
 
         @Override
@@ -130,7 +129,6 @@ public class HomeScreen extends AppCompatActivity implements PainterAdapter.OnIn
             painterAdapter.notifyDataSetChanged();
         }
     }
-
 
     @Override
     public void painterInfo(Painter painter, int position) {
