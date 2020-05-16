@@ -3,30 +3,27 @@ package com.gelu.painter.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.gelu.painter.R;
 import com.gelu.painter.adapter.PainterPersonalDetailsAdapter;
 import com.gelu.painter.adapter.ViewPagerAdapter;
 import com.gelu.painter.model.PainterImages;
 import com.gelu.painter.utility.TinyDB;
-
 import java.util.ArrayList;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 public class PainterDetailScreen extends AppCompatActivity implements PainterPersonalDetailsAdapter.OnLikeClick, ViewPagerAdapter.OnLikeClick, View.OnClickListener {
 
     private PainterDetailScreen mContext;
-    private RecyclerView rvPainterInfo;
     private PainterPersonalDetailsAdapter detailsAdapter;
     private ArrayList<PainterImages> painterImagesArrayList;
-    ViewPagerAdapter viewPagerAdapter;
-    ViewPager viewPager;
-    AppCompatImageView ivLogout;
+    private ViewPagerAdapter viewPagerAdapter;
+    private ViewPager viewPager;
+    private AppCompatImageView ivLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +35,11 @@ public class PainterDetailScreen extends AppCompatActivity implements PainterPer
 
     private void initUI() {
         painterImagesArrayList = new ArrayList<>();
+
         for (int j = 1; j <= 10; j++) {
             PainterImages painterImages = new PainterImages();
             painterImages.setId(j);
             painterImages.setLike(false);
-            painterImages.setLikeCount(0);
             if (j == 1) {
                 painterImages.setImages(ContextCompat.getDrawable(mContext, R.drawable.a1));
             } else if (j == 2) {
@@ -66,30 +63,13 @@ public class PainterDetailScreen extends AppCompatActivity implements PainterPer
             }
             painterImagesArrayList.add(painterImages);
         }
-/*
-        rvPainterInfo = findViewById(R.id.rvPainterImagesDetails);
-        rvPainterInfo.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        rvPainterInfo.setAdapter(detailsAdapter);
-        */
+
         viewPager = findViewById(R.id.viewPager);
         detailsAdapter = new PainterPersonalDetailsAdapter(mContext, painterImagesArrayList, this);
         viewPagerAdapter = new ViewPagerAdapter(mContext, painterImagesArrayList, this);
         viewPager.setAdapter(viewPagerAdapter);
         ivLogout = findViewById(R.id.ivLogout);
         ivLogout.setOnClickListener(this);
-
-    }
-
-    @Override
-    public void onLikeClick(PainterImages painterImages, int position, AppCompatImageView ivLike) {
-
-        if (painterImagesArrayList.get(position).getLike()) {
-            painterImagesArrayList.get(position).setLike(false);
-        } else {
-            painterImagesArrayList.get(position).setLike(true);
-        }
-        viewPagerAdapter.notifyDataSetChanged();
-
     }
 
     @Override
@@ -101,20 +81,22 @@ public class PainterDetailScreen extends AppCompatActivity implements PainterPer
                 finishAffinity();
                 break;
         }
+    }
 
+    @Override
+    public void onLikeClick(PainterImages painterImages, int position, AppCompatImageView ivLike, TextView tvLike) {
+        if (painterImagesArrayList.get(position).getLike()) {
+            tvLike.setText("0");
+            painterImagesArrayList.get(position).setLikeCount(0);
+            painterImagesArrayList.get(position).setLike(false);
+        } else {
+            tvLike.setText("1");
+            painterImagesArrayList.get(position).setLikeCount(1);
+            painterImagesArrayList.get(position).setLike(true);
+        }
+        viewPagerAdapter.notifyDataSetChanged();
     }
 }
 
-  /*  @Override
-    public void onLikeClick(PainterImages painterImages, int position, AppCompatImageView ivLike) {
 
-        boolean isLike = false;
-        if (isLike) {
-            isLike = true;
-            ivLike.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.like));
-        } else {
-            isLike = false;
-            ivLike.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.dislike));
-        }
-    }*/
 

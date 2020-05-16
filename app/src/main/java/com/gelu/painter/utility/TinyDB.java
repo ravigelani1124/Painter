@@ -15,6 +15,7 @@ public class TinyDB {
     public static final String defaultString = "-1";
     public static final String user = "user";
     public static final int userId = 0;
+    public static final String painterList="painterlist";
 
 
     private SharedPreferences preferences;

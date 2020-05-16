@@ -43,22 +43,26 @@ public class PainterPersonalDetailsAdapter extends RecyclerView.Adapter<PainterP
 
         if (painterImages.getLike() != null) {
             if (painterImages.getLike()) {
+                holder.tvLikeCount.setText(String.valueOf(1));
                 holder.ivLike.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like));
             } else {
+                holder.tvLikeCount.setText(String.valueOf(painterImages.getLikeCount()));
                 holder.ivLike.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.dislike));
+                holder.tvLikeCount.setText(String.valueOf(0));
             }
         } else {
             holder.ivLike.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.dislike));
+            holder.tvLikeCount.setText(String.valueOf(0));
         }
 
+        holder.tvLikeCount.setText(String.valueOf(painterImages.getLikeCount()));
         holder.ivLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               onLikeClick.onLikeClick(painterImages,position,holder.ivLike);
+               onLikeClick.onLikeClick(painterImages,position,holder.ivLike,holder.tvLikeCount);
             }
         });
 
-        holder.tvLikeCount.setText(String.valueOf(painterImages.getLikeCount()));
     }
 
     @Override
@@ -80,6 +84,6 @@ public class PainterPersonalDetailsAdapter extends RecyclerView.Adapter<PainterP
     }
 
    public interface OnLikeClick{
-        void onLikeClick(PainterImages painterImages,int position,AppCompatImageView ivLike);
+        void onLikeClick(PainterImages painterImages,int position,AppCompatImageView ivLike,TextView tvLike);
     }
 }

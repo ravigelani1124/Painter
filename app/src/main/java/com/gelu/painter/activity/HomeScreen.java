@@ -1,19 +1,17 @@
 package com.gelu.painter.activity;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.gelu.painter.R;
 import com.gelu.painter.adapter.PainterAdapter;
 import com.gelu.painter.database.LocalRoomDatabase;
 import com.gelu.painter.database.Painter;
 import com.gelu.painter.model.PainterImages;
+import com.gelu.painter.utility.TinyDB;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -24,7 +22,7 @@ public class HomeScreen extends AppCompatActivity implements PainterAdapter.OnIn
 
     private HomeScreen mContext;
     private RecyclerView rvPainter;
-    private ArrayList<Painter> painterArrayList;
+    public ArrayList<Painter> painterArrayList;
     private ArrayList<PainterImages> painterImagesArrayList;
     private PainterAdapter painterAdapter;
     private LocalRoomDatabase database;
@@ -45,13 +43,7 @@ public class HomeScreen extends AppCompatActivity implements PainterAdapter.OnIn
         rvPainter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         painterAdapter = new PainterAdapter(mContext, painterArrayList, this);
         rvPainter.setAdapter(painterAdapter);
-
-        //setData for painter
-        if (painterArrayList == null || painterArrayList.size() < 10) {
-            addPainterInDatabase();
-        }
-        //GetDataForPainter
-        new GetPainterData().execute();
+        addPainterInDatabase();
     }
 
     private void addPainterInDatabase() {
@@ -88,50 +80,14 @@ public class HomeScreen extends AppCompatActivity implements PainterAdapter.OnIn
             painter.setId(i);
             painter.setPainterName("Painter " + i);
             painter.setPainterImagesArrayList(painterImagesArrayList);
-            new AddPainter().execute(painter);
+            painterArrayList.add(painter);
         }
+        painterAdapter.notifyDataSetChanged();
     }
 
-    private class GetPainterData extends AsyncTask<Painter, String, Painter> {
-
-        @Override
-        protected com.gelu.painter.database.Painter doInBackground(com.gelu.painter.database.Painter... painters) {
-            List<com.gelu.painter.database.Painter> list = database.painterDao().getAllPainter();
-            String data = new Gson().toJson(list);
-            Log.e("Painter DATA1", data);
-            painterArrayList.clear();
-            painterArrayList.addAll(list);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Painter model) {
-            super.onPostExecute(model);
-        }
-    }
-
-    private class AddPainter extends AsyncTask<Painter, String, Painter> {
-
-        @Override
-        protected Painter doInBackground(Painter... painters) {
-            List<Painter> list = database.painterDao().getAllPainter();
-            String data = new Gson().toJson(list);
-            Log.e("Painter DATA", data);
-            if (list == null || list.size() < 10) {
-                database.painterDao().addPainter(painters[0]);
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Painter model) {
-            super.onPostExecute(model);
-            painterAdapter.notifyDataSetChanged();
-        }
-    }
 
     @Override
     public void painterInfo(Painter painter, int position) {
-        startActivity(new Intent(mContext, PainterDetailScreen.class).putExtra("painterData", painter.getId()));
+        startActivity(new Intent(mContext, PainterDetailScreen.class));
     }
 }

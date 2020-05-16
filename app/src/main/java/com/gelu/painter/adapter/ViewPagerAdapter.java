@@ -70,7 +70,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         ivLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onLikeClick.onLikeClick(painterImages, position, ivLike);
+                onLikeClick.onLikeClick(painterImages, position, ivLike,tvLikeCount);
                 if (painterImages.getLike() != null) {
                     if (painterImages.getLike()) {
                         ivLike.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like));
@@ -96,7 +96,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     }
 
     public interface OnLikeClick {
-        void onLikeClick(PainterImages painterImages, int position, AppCompatImageView ivLike);
+        void onLikeClick(PainterImages painterImages, int position, AppCompatImageView ivLike,TextView tvLikeCount);
     }
 
 }
