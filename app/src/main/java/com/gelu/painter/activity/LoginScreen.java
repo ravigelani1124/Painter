@@ -73,6 +73,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 if (checkValidation()) {
                     Toast.makeText(mContext, mContext.getResources().getString(R.string.str_login_message), Toast.LENGTH_SHORT).show();
                     new TinyDB(mContext).putBoolean(TinyDB.isLogin, true);
+                    new TinyDB(mContext).putString(TinyDB.user, etUserId.getText().toString().trim());
                     startActivity(new Intent(mContext, HomeScreen.class));
                     finish();
                 }

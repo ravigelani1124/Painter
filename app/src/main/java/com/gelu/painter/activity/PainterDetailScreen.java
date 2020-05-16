@@ -1,11 +1,14 @@
 package com.gelu.painter.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.gelu.painter.R;
 import com.gelu.painter.adapter.PainterPersonalDetailsAdapter;
 import com.gelu.painter.adapter.ViewPagerAdapter;
 import com.gelu.painter.model.PainterImages;
+import com.gelu.painter.utility.TinyDB;
 
 import java.util.ArrayList;
 
@@ -15,7 +18,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-public class PainterDetailScreen extends AppCompatActivity implements PainterPersonalDetailsAdapter.OnLikeClick, ViewPagerAdapter.OnLikeClick {
+public class PainterDetailScreen extends AppCompatActivity implements PainterPersonalDetailsAdapter.OnLikeClick, ViewPagerAdapter.OnLikeClick, View.OnClickListener {
 
     private PainterDetailScreen mContext;
     private RecyclerView rvPainterInfo;
@@ -23,6 +26,7 @@ public class PainterDetailScreen extends AppCompatActivity implements PainterPer
     private ArrayList<PainterImages> painterImagesArrayList;
     ViewPagerAdapter viewPagerAdapter;
     ViewPager viewPager;
+    AppCompatImageView ivLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,9 @@ public class PainterDetailScreen extends AppCompatActivity implements PainterPer
         detailsAdapter = new PainterPersonalDetailsAdapter(mContext, painterImagesArrayList, this);
         viewPagerAdapter = new ViewPagerAdapter(mContext, painterImagesArrayList, this);
         viewPager.setAdapter(viewPagerAdapter);
+        ivLogout = findViewById(R.id.ivLogout);
+        ivLogout.setOnClickListener(this);
+
     }
 
     @Override
@@ -85,6 +92,19 @@ public class PainterDetailScreen extends AppCompatActivity implements PainterPer
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ivLogout:
+                new TinyDB(mContext).clear();
+                startActivity(new Intent(mContext, LoginScreen.class));
+                finishAffinity();
+                break;
+        }
+
+    }
+}
+
   /*  @Override
     public void onLikeClick(PainterImages painterImages, int position, AppCompatImageView ivLike) {
 
@@ -97,4 +117,4 @@ public class PainterDetailScreen extends AppCompatActivity implements PainterPer
             ivLike.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.dislike));
         }
     }*/
-}
+
